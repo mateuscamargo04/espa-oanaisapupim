@@ -1,0 +1,623 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espaço Anaisa Pupim — Salão de Beleza · Taquaritinga SP</title>
+<meta name="description" content="Salão de beleza em Taquaritinga SP. Nota 5,0 · 65 avaliações Google. Profissionais excelentes, atendimento com amor e carinho. Agende agora!">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --rose:       #E8A0A8;
+  --rose-deep:  #C96B77;
+  --rose-dark:  #9E3D4C;
+  --rose-bg:    #FDF0F2;
+  --rose-mid:   #F2C4CA;
+  --pink-soft:  #FAE8EB;
+  --gold:       #C9A84C;
+  --gold-light: #E8D48A;
+  --gold-pale:  #FDF6E3;
+  --gold-dark:  #8A6A1E;
+  --text-dark:  #1A0A0D;
+  --text-mid:   #6B3A42;
+  --text-soft:  #A07078;
+  --white:      #FFFFFF;
+  --off-white:  #FEF9F9;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Raleway',sans-serif;background:var(--rose-bg);color:var(--text-dark);overflow-x:hidden;cursor:none}
+ 
+/* CURSOR */
+#cur{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
+#cur-ring{position:fixed;width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s,opacity .3s}
+#cur-ring.big{width:54px;height:54px;opacity:.5}
+ 
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--text-dark);z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .9s,visibility .9s}
+#loader.gone{opacity:0;visibility:hidden}
+.ld-logo{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold);letter-spacing:.25em;text-align:center}
+.ld-logo span{color:var(--rose-mid);display:block;font-size:1rem;letter-spacing:.35em;margin-top:.4rem;font-style:italic}
+.ld-line{width:180px;height:1px;background:rgba(201,168,76,.15);overflow:hidden;position:relative}
+.ld-line::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:ldAnim 1.8s ease forwards}
+@keyframes ldAnim{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+ 
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:600;padding:1.5rem 5rem;display:flex;justify-content:space-between;align-items:center;transition:all .5s}
+nav.stuck{background:rgba(253,240,242,.96);backdrop-filter:blur(18px);padding:1rem 5rem;box-shadow:0 1px 0 rgba(201,168,76,.2)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;letter-spacing:.1em;color:var(--gold);text-decoration:none;transition:color .4s;line-height:1.1}
+.nav-logo small{display:block;font-size:.65rem;letter-spacing:.28em;color:rgba(255,255,255,.5);text-transform:uppercase;transition:color .4s}
+nav.stuck .nav-logo small{color:var(--text-soft)}
+.nav-links{display:flex;gap:2.8rem;list-style:none}
+.nav-links a{text-decoration:none;font-size:.72rem;letter-spacing:.18em;color:rgba(255,255,255,.65);transition:color .3s;text-transform:uppercase;font-weight:500}
+nav.stuck .nav-links a{color:var(--text-soft)}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:.7rem 1.9rem;border-radius:40px;font-family:'Raleway',sans-serif;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:all .35s;font-weight:600}
+.nav-cta:hover{background:var(--gold);color:var(--text-dark)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:none;padding:.3rem}
+.burger span{display:block;width:22px;height:1px;background:var(--gold);transition:all .3s}
+ 
+/* DRAWER */
+#drawer{position:fixed;inset:0;background:var(--text-dark);z-index:500;transform:translateX(100%);transition:transform .65s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3rem}
+#drawer.open{transform:none}
+#drawer a{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--gold);text-decoration:none;opacity:0;transform:translateX(60px);transition:all .5s;font-weight:300;letter-spacing:.05em}
+#drawer.open a{opacity:1;transform:none}
+#drawer.open a:nth-child(2){transition-delay:.08s}
+#drawer.open a:nth-child(3){transition-delay:.16s}
+#drawer.open a:nth-child(4){transition-delay:.24s}
+#drawer.open a:nth-child(5){transition-delay:.32s}
+#drawer.open a:nth-child(6){transition-delay:.40s}
+#drawer.open a:nth-child(7){transition-delay:.48s}
+#drawer a:hover{color:var(--rose-mid);font-style:italic}
+#dclose{position:absolute;top:2rem;right:2.5rem;background:none;border:none;cursor:none;font-size:2.5rem;color:rgba(255,255,255,.4);line-height:1;font-weight:300}
+ 
+/* HERO */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
+.hs{position:absolute;inset:0}
+.hs-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 2s ease;transform:scale(1.04)}
+.hs-slide.on{opacity:1;animation:khZoom 8s ease forwards}
+@keyframes khZoom{from{transform:scale(1.04)}to{transform:scale(1)}}
+.hs-slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1560869713-7d0a29430803?w=1800&q=85&fit=crop')}
+.hs-slide:nth-child(2){background-image:url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1800&q=85&fit=crop')}
+.hs-slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1562322140-8baeececf3df?w=1800&q=85&fit=crop')}
+.hs-slide:nth-child(4){background-image:url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1800&q=85&fit=crop')}
+.hs-slide:nth-child(5){background-image:url('https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=1800&q=85&fit=crop')}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(120deg,rgba(26,10,13,.82) 0%,rgba(26,10,13,.55) 55%,rgba(201,107,119,.18) 100%)}
+.hero-band{position:absolute;right:-120px;top:0;bottom:0;width:45%;background:linear-gradient(145deg,rgba(232,160,168,.08),rgba(201,168,76,.06));clip-path:polygon(18% 0,100% 0,100% 100%,0 100%);pointer-events:none}
+.hero-content{position:relative;z-index:2;padding:0 6rem;max-width:820px}
+.hero-pill{display:inline-flex;align-items:center;gap:.7rem;border:1px solid rgba(201,168,76,.4);color:var(--gold-light);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;padding:.55rem 1.3rem;border-radius:30px;margin-bottom:2rem;opacity:0;animation:fUp .8s .3s forwards;backdrop-filter:blur(6px);background:rgba(201,168,76,.08)}
+.hero-pill::before{content:'✦';font-size:.6rem}
+.hero-h{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,7vw,6.5rem);font-weight:300;line-height:1.02;color:var(--white);opacity:0;animation:fUp .9s .5s forwards;margin-bottom:1.8rem}
+.hero-h em{font-style:italic;color:var(--gold-light);display:block}
+.hero-h strong{font-weight:600;color:var(--rose-mid)}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.65);line-height:2;max-width:460px;opacity:0;animation:fUp .8s .75s forwards;margin-bottom:1rem;font-weight:300}
+.hero-stars{display:flex;align-items:center;gap:.8rem;margin-bottom:2.8rem;opacity:0;animation:fUp .8s .9s forwards}
+.stars-gold{color:var(--gold);font-size:1rem;letter-spacing:.08em}
+.hero-stars span{font-size:.8rem;color:rgba(255,255,255,.5);letter-spacing:.06em}
+.hero-btns{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:fUp .8s 1.1s forwards}
+.btn-gold{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 50%,var(--gold) 100%);background-size:200%;color:var(--text-dark);padding:1.05rem 2.6rem;border-radius:50px;text-decoration:none;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;transition:all .5s;display:inline-flex;align-items:center;gap:.8rem}
+.btn-gold:hover{background-position:right;transform:translateY(-3px);box-shadow:0 14px 40px rgba(201,168,76,.45)}
+.btn-outline-gold{border:1px solid rgba(201,168,76,.5);color:var(--gold-light);padding:1.05rem 2.4rem;border-radius:50px;text-decoration:none;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;transition:all .4s;display:inline-flex;align-items:center;gap:.8rem}
+.btn-outline-gold:hover{border-color:var(--gold);background:rgba(201,168,76,.1);transform:translateY(-3px)}
+@keyframes fUp{from{opacity:0;transform:translateY(35px)}to{opacity:1;transform:translateY(0)}}
+.hdots{position:absolute;bottom:3rem;left:6rem;z-index:3;display:flex;gap:.7rem}
+.hdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.25);cursor:none;transition:all .4s}
+.hdot.on{background:var(--gold);width:22px;border-radius:3px}
+.scrl{position:absolute;bottom:3rem;right:6rem;z-index:3;display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,.35);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase}
+.scrl-line{width:1px;height:44px;background:rgba(255,255,255,.15);overflow:hidden;position:relative}
+.scrl-line::after{content:'';position:absolute;top:-100%;width:100%;height:100%;background:var(--gold);animation:scrlA 2s ease-in-out infinite}
+@keyframes scrlA{to{top:100%}}
+ 
+/* GOLD STRIP */
+.gstrip{background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-light),var(--gold),var(--gold-dark));display:flex;flex-wrap:wrap}
+.gstrip-item{flex:1;min-width:180px;padding:2.2rem 2rem;text-align:center;border-right:1px solid rgba(255,255,255,.15);transition:background .3s}
+.gstrip-item:last-child{border:none}
+.gstrip-item:hover{background:rgba(255,255,255,.12)}
+.gstrip-num{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:400;color:var(--text-dark);line-height:1;display:block}
+.gstrip-label{font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(26,10,13,.65);margin-top:.4rem;display:block;font-weight:600}
+ 
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:260px 260px;gap:3px}
+.gal-item{overflow:hidden;position:relative;cursor:none}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.16,1,.3,1),filter .6s}
+.gal-item:hover img{transform:scale(1.1);filter:brightness(1.08) saturate(1.1)}
+.gal-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(26,10,13,.5),transparent);opacity:0;transition:opacity .4s}
+.gal-item:hover::after{opacity:1}
+.gal-item::before{content:'✦';position:absolute;bottom:1.2rem;right:1.2rem;color:var(--gold);font-size:.8rem;z-index:2;opacity:0;transition:opacity .4s}
+.gal-item:hover::before{opacity:1}
+.gal-item:first-child{grid-row:span 2}
+ 
+/* MARQUEE */
+.mq-wrap{background:var(--pink-soft);padding:1.3rem 0;overflow:hidden;border-top:1px solid rgba(201,168,76,.2);border-bottom:1px solid rgba(201,168,76,.2)}
+.mq-track{display:flex;gap:2.5rem;width:max-content;animation:mq 35s linear infinite}
+.mq-wrap:hover .mq-track{animation-play-state:paused}
+.mq-item{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--rose-dark);white-space:nowrap;display:flex;align-items:center;gap:1.2rem;letter-spacing:.04em}
+.mq-item::after{content:'✦';color:var(--gold);font-style:normal;font-family:'Raleway',sans-serif;font-size:.65rem;opacity:.7}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+ 
+/* SECTIONS */
+section{padding:7rem 6rem}
+.eyebrow{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.9rem;margin-bottom:1.1rem;font-weight:600}
+.eyebrow::before{content:'';width:28px;height:1px;background:var(--gold)}
+.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:400;line-height:1.12;margin-bottom:1.6rem;color:var(--text-dark)}
+.sh em{font-style:italic;color:var(--gold)}
+.sh strong{font-weight:600;color:var(--rose-deep)}
+ 
+/* SERVICES */
+.svc-section{background:var(--off-white)}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.8rem;margin-top:4rem}
+.scard{background:var(--white);border-radius:18px;padding:2.2rem;border:1px solid rgba(201,168,76,.12);transition:all .5s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+.scard::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,212,138,.08),transparent);opacity:0;transition:opacity .5s}
+.scard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--rose-deep),var(--gold),var(--rose-deep));transform:scaleX(0);transform-origin:left;transition:transform .5s}
+.scard:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(201,168,76,.14),0 8px 24px rgba(158,61,76,.08);border-color:rgba(201,168,76,.3)}
+.scard:hover::after{opacity:1}
+.scard:hover::before{transform:scaleX(1)}
+.sc-no{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:rgba(201,168,76,.12);line-height:1;transition:color .5s}
+.scard:hover .sc-no{color:rgba(201,168,76,.25)}
+.sc-icon{font-size:1.7rem;margin-top:-.8rem;margin-bottom:1rem}
+.sc-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--text-dark);margin-bottom:.7rem}
+.sc-desc{font-size:.85rem;color:var(--text-soft);line-height:1.85;font-weight:300}
+.sc-tag{display:inline-block;margin-top:1.2rem;background:linear-gradient(90deg,rgba(201,168,76,.12),rgba(201,168,76,.06));color:var(--gold-dark);padding:.35rem 1rem;border-radius:20px;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(201,168,76,.2);font-weight:600}
+ 
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:85vh}
+.about-vis{background:var(--text-dark);position:relative;overflow:hidden;display:grid;grid-template-rows:1fr 1fr;grid-template-columns:1fr 1fr}
+.about-vis img{width:100%;height:100%;object-fit:cover;transition:transform .9s,filter .6s;filter:sepia(.15) saturate(.95)}
+.about-vis img:hover{transform:scale(1.06);filter:sepia(0) saturate(1.1)}
+.about-vis::after{content:'';position:absolute;top:2rem;left:2rem;right:2rem;bottom:2rem;border:1px solid rgba(201,168,76,.2);pointer-events:none;z-index:2}
+.about-vis .img-big{grid-row:span 2}
+.about-copy{background:var(--text-dark);padding:6rem 5rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.about-copy::before{content:'A';font-family:'Cormorant Garamond',serif;font-size:22rem;font-weight:700;color:rgba(201,168,76,.04);position:absolute;right:-2rem;top:50%;transform:translateY(-50%);line-height:1;pointer-events:none;font-style:italic}
+.about-copy .eyebrow{color:var(--gold-light)}
+.about-copy .eyebrow::before{background:var(--gold-light)}
+.about-copy .sh{color:var(--off-white)}
+.about-copy .sh em{color:var(--gold-light)}
+.about-copy p{color:rgba(255,255,255,.55);line-height:2;margin-bottom:1.2rem;font-size:.92rem;font-weight:300;position:relative;z-index:1}
+.about-pills{display:flex;flex-wrap:wrap;gap:.8rem;margin:1.8rem 0;position:relative;z-index:1}
+.ap{background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold-light);padding:.5rem 1.2rem;border-radius:30px;font-size:.72rem;letter-spacing:.08em;font-weight:500}
+.btn-wa-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--text-dark);padding:1.05rem 2.4rem;border-radius:50px;text-decoration:none;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;transition:all .4s;display:inline-flex;align-items:center;gap:.8rem;position:relative;z-index:1;margin-top:.5rem}
+.btn-wa-gold:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(201,168,76,.4);background:linear-gradient(135deg,var(--gold-light),var(--gold))}
+ 
+/* QUOTE BAND */
+.qband{background:linear-gradient(135deg,var(--rose-dark),#7A2533);padding:5rem 6rem;text-align:center;position:relative;overflow:hidden}
+.qband::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:20rem;font-weight:700;color:rgba(255,255,255,.04);position:absolute;top:-4rem;left:50%;transform:translateX(-50%);line-height:1;pointer-events:none}
+.qband blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,3.5vw,2.6rem);font-weight:300;font-style:italic;color:var(--gold-light);line-height:1.6;max-width:780px;margin:0 auto 1.5rem;position:relative;z-index:1}
+.qband cite{font-size:.75rem;color:rgba(255,255,255,.4);letter-spacing:.16em;text-transform:uppercase;font-style:normal}
+ 
+/* REVIEWS */
+.rev-section{background:var(--rose-bg);position:relative;overflow:hidden}
+.rev-section::before{content:'';position:absolute;top:-80px;right:-80px;width:350px;height:350px;border-radius:50%;background:rgba(201,168,76,.06)}
+.rev-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;margin-bottom:4rem}
+.big-num{font-family:'Cormorant Garamond',serif;font-size:6rem;font-weight:300;color:var(--gold);line-height:1}
+.big-sub{color:var(--text-soft);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-top:.4rem}
+.big-stars{color:var(--gold);font-size:1.3rem;letter-spacing:.1em}
+.rev-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.rcard{background:var(--white);border-radius:20px;padding:2.2rem;border:1px solid rgba(201,168,76,.12);transition:all .45s;position:relative;overflow:hidden}
+.rcard::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:6rem;position:absolute;top:-.5rem;left:1rem;color:rgba(201,168,76,.1);line-height:1;pointer-events:none}
+.rcard:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(201,168,76,.15),0 6px 20px rgba(158,61,76,.06);border-color:rgba(201,168,76,.3)}
+.rc-stars{color:var(--gold);font-size:.9rem;letter-spacing:.1em;margin-bottom:1.2rem}
+.rc-text{font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-style:italic;color:var(--text-mid);line-height:1.8;margin-bottom:1.8rem;position:relative;z-index:1}
+.rc-author{display:flex;align-items:center;gap:.9rem}
+.rc-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--rose-deep),var(--rose));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--white);flex-shrink:0}
+.rc-name{font-size:.87rem;font-weight:600;color:var(--text-dark)}
+.rc-meta{font-size:.72rem;color:var(--text-soft);margin-top:.15rem}
+ 
+/* CTA AGENDAR */
+.cta-block{background:var(--text-dark);padding:7rem 6rem;text-align:center;position:relative;overflow:hidden}
+.cta-block::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);pointer-events:none}
+.cta-block::after{content:'✦ ✦ ✦';position:absolute;bottom:3rem;right:4rem;font-size:.8rem;color:rgba(201,168,76,.2);letter-spacing:1rem}
+.cta-block .eyebrow{justify-content:center;color:var(--gold-light)}
+.cta-block .eyebrow::before{display:none}
+.cta-block .sh{color:var(--off-white);max-width:580px;margin:0 auto 1.5rem}
+.cta-block .sh em{color:var(--gold-light)}
+.cta-block > p{color:rgba(255,255,255,.45);font-size:.95rem;max-width:460px;margin:0 auto 3.5rem;line-height:1.9;font-weight:300}
+.wa-mega{display:inline-flex;align-items:center;gap:1rem;background:#25D366;color:#fff;padding:1.3rem 3.2rem;border-radius:60px;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;text-decoration:none;transition:all .45s;box-shadow:0 0 0 0 rgba(37,211,102,.4)}
+.wa-mega:hover{transform:translateY(-5px);box-shadow:0 20px 55px rgba(37,211,102,.45),0 0 0 14px rgba(37,211,102,.08)}
+.wa-mega svg{width:22px;height:22px;flex-shrink:0}
+.wa-tel{margin-top:2rem;color:rgba(255,255,255,.25);font-size:.78rem;letter-spacing:.1em}
+.wa-tel a{color:var(--gold-light);text-decoration:none;transition:color .3s}
+.wa-tel a:hover{color:var(--gold)}
+ 
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr}
+.c-info{padding:6rem;background:var(--pink-soft)}
+.c-map iframe{width:100%;height:100%;min-height:480px;border:none;filter:sepia(.2) saturate(.85) hue-rotate(-10deg)}
+.ig{margin-bottom:2.5rem}
+.ig h4{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;font-weight:700}
+.irow{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.8rem;font-size:.9rem;color:var(--text-soft);line-height:1.7}
+.irow svg{width:17px;height:17px;flex-shrink:0;margin-top:3px;color:var(--rose-deep)}
+.irow a{color:var(--text-soft);text-decoration:none;transition:color .3s}
+.irow a:hover{color:var(--gold)}
+.open-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#15803d;padding:.4rem 1rem;border-radius:20px;font-size:.72rem;margin-top:.6rem;font-weight:600}
+.open-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:#22c55e}
+.hbar-wrap{background:var(--white);border-radius:14px;padding:1.2rem 1.4rem;margin-top:1rem;border:1px solid rgba(201,168,76,.1)}
+.hbar-label{font-size:.65rem;color:var(--text-soft);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.8rem}
+.hbars{display:flex;align-items:flex-end;gap:5px;height:40px}
+.hb{flex:1;border-radius:3px 3px 0 0;background:var(--rose-mid);opacity:.4}
+.hb.hi{background:var(--rose-deep);opacity:.7}
+.hb.pk{background:var(--gold);opacity:1}
+.hb-times{display:flex;justify-content:space-between;font-size:.62rem;color:var(--text-soft);margin-top:.4rem}
+ 
+/* INCLUSIVE STRIP */
+.incl{background:linear-gradient(90deg,var(--rose-dark),var(--rose-deep));padding:1.4rem 5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem}
+.incl p{color:rgba(255,255,255,.8);font-size:.82rem;display:flex;align-items:center;gap:1rem}
+.rb{height:2px;width:60px;background:linear-gradient(90deg,#FF0018,#FF8C00,#FFD700,#00811F,#0044FF,#760089);border-radius:1px}
+ 
+/* FOOTER */
+.foot-bar{height:2px;background:linear-gradient(90deg,var(--rose-deep),var(--gold),var(--rose-deep))}
+footer{background:var(--text-dark);padding:4rem 5rem;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem}
+.flogo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;color:var(--gold);letter-spacing:.1em;line-height:1.1}
+.flogo small{display:block;font-size:.6rem;letter-spacing:.3em;color:rgba(201,168,76,.4);text-transform:uppercase;margin-top:.2rem}
+.fcenter{text-align:center;color:rgba(255,255,255,.2);font-size:.75rem;line-height:2}
+.fright{display:flex;flex-direction:column;align-items:flex-end;gap:.8rem}
+.fright a{color:rgba(255,255,255,.35);text-decoration:none;font-size:.78rem;transition:color .3s;display:flex;align-items:center;gap:.6rem}
+.fright a:hover{color:var(--gold)}
+ 
+/* FLOAT WA */
+#fwa{position:fixed;bottom:2.5rem;right:2.5rem;z-index:400;background:#25D366;color:#fff;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 6px 28px rgba(37,211,102,.5);transition:all .35s;animation:waPing 2.8s ease-in-out infinite}
+#fwa:hover{transform:scale(1.14)}
+#fwa svg{width:28px;height:28px}
+@keyframes waPing{0%,100%{box-shadow:0 6px 28px rgba(37,211,102,.5)}50%{box-shadow:0 6px 42px rgba(37,211,102,.7),0 0 0 12px rgba(37,211,102,.1)}}
+ 
+/* REVEAL */
+.rv{opacity:0;transform:translateY(38px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+ 
+/* RESPONSIVE */
+@media(max-width:1100px){
+  nav{padding:1.2rem 2.5rem}
+  nav.stuck{padding:.9rem 2.5rem}
+  .hero-content{padding:0 3rem}
+  .hdots{left:3rem}
+  .scrl{right:3rem}
+  section{padding:5rem 3rem}
+  .about-wrap{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr}
+  .c-info{padding:4rem 3rem}
+  footer{grid-template-columns:1fr;text-align:center}
+  .fright{align-items:center}
+  .incl{padding:1.2rem 2.5rem}
+  .qband{padding:4rem 3rem}
+  .cta-block{padding:5rem 3rem}
+}
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  nav.stuck{padding:.8rem 1.5rem}
+  .nav-links,.nav-cta{display:none}
+  .burger{display:flex}
+  .hero-content{padding:0 1.5rem;padding-top:5rem}
+  .hdots{left:1.5rem;bottom:2rem}
+  .scrl{display:none}
+  .hero-h{font-size:2.6rem}
+  section{padding:4rem 1.5rem}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px}
+  .gal-item:first-child{grid-row:span 1;grid-column:span 2}
+  .gstrip{flex-direction:column}
+  .gstrip-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.1)}
+  .incl{padding:1.2rem 1.5rem;flex-direction:column;align-items:flex-start}
+  footer{padding:3rem 1.5rem}
+  body{cursor:auto}
+  #cur,#cur-ring{display:none}
+  a,button{cursor:pointer}
+}
+</style>
+</head>
+<body>
+ 
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-logo">Espaço Anaisa Pupim<span>Salão de Beleza · Taquaritinga</span></div>
+  <div class="ld-line"></div>
+</div>
+ 
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+ 
+<!-- FLOAT WA -->
+<a id="fwa" href="https://wa.me/5516992859805?text=Olá%20Anaisa!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20horário%20✨" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.879L0 24l6.294-1.515A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.663-.497-5.197-1.367l-.373-.22-3.736.9.938-3.629-.243-.38A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+ 
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">Espaço Anaisa Pupim<small>Salão de Beleza · Taquaritinga</small></a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#galeria">Galeria</a></li>
+    <li><a href="#avaliacoes">Avaliações</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a class="nav-cta" href="https://wa.me/5516992859805?text=Olá%20Anaisa!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20horário%20✨" target="_blank" rel="noopener">Agendar ✦</a>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+ 
+<!-- DRAWER -->
+<div id="drawer">
+  <button id="dclose" aria-label="Fechar">×</button>
+  <a href="#servicos">Serviços</a>
+  <a href="#sobre">Sobre nós</a>
+  <a href="#galeria">Galeria</a>
+  <a href="#avaliacoes">Avaliações</a>
+  <a href="#contato">Contato</a>
+  <a href="https://wa.me/5516992859805?text=Olá%20Anaisa!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20horário%20✨" target="_blank">Agendar ✦</a>
+</div>
+ 
+<!-- HERO -->
+<section class="hero">
+  <div class="hs">
+    <div class="hs-slide on"></div>
+    <div class="hs-slide"></div>
+    <div class="hs-slide"></div>
+    <div class="hs-slide"></div>
+    <div class="hs-slide"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-band"></div>
+  <div class="hero-content">
+    <div class="hero-pill">Salão de Beleza · Taquaritinga SP</div>
+    <div class="hero-stars">
+      <div class="stars-gold">★★★★★</div>
+      <span>5,0 · 65 avaliações Google Maps</span>
+    </div>
+    <h1 class="hero-h">
+      Beleza feita<br><em>com amor</em><br><strong>&amp; carinho</strong>
+    </h1>
+    <p class="hero-sub">O único salão na cidade que você pode confiar de olhos fechados. Profissionais excelentes, atendimento inesquecível e resultados que transformam.</p>
+    <div class="hero-btns">
+      <a class="btn-gold" href="https://wa.me/5516992859805?text=Olá%20Anaisa!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20horário%20✨" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.879L0 24l6.294-1.515A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.663-.497-5.197-1.367l-.373-.22-3.736.9.938-3.629-.243-.38A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Agendar pelo WhatsApp
+      </a>
+      <a class="btn-outline-gold" href="#servicos">Nossos Serviços</a>
+    </div>
+  </div>
+  <div class="hdots">
+    <div class="hdot on" data-i="0"></div>
+    <div class="hdot" data-i="1"></div>
+    <div class="hdot" data-i="2"></div>
+    <div class="hdot" data-i="3"></div>
+    <div class="hdot" data-i="4"></div>
+  </div>
+  <div class="scrl"><span>scroll</span><div class="scrl-line"></div></div>
+</section>
+ 
+<!-- GOLD STRIP -->
+<div class="gstrip">
+  <div class="gstrip-item rv"><span class="gstrip-num" data-val="5.0" data-dec="1">5,0</span><span class="gstrip-label">Nota Google</span></div>
+  <div class="gstrip-item rv d1"><span class="gstrip-num" data-val="65" data-dec="0">65</span><span class="gstrip-label">Avaliações 5★</span></div>
+  <div class="gstrip-item rv d2"><span class="gstrip-num" data-val="100" data-dec="0">100</span><span class="gstrip-label">% Satisfação</span></div>
+  <div class="gstrip-item rv d3"><span class="gstrip-num">♥</span><span class="gstrip-label">Feito com Amor</span></div>
+</div>
+ 
+<!-- GALLERY -->
+<div class="gallery" id="galeria">
+  <div class="gal-item"><img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=800&q=85&fit=crop" alt="Salão" loading="lazy"></div>
+  <div class="gal-item"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=85&fit=crop" alt="Tratamento" loading="lazy"></div>
+  <div class="gal-item"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=85&fit=crop" alt="Alisamento" loading="lazy"></div>
+  <div class="gal-item"><img src="https://images.unsplash.com/photo-1596178060810-72f53ce9a65c?w=600&q=85&fit=crop" alt="Coloração" loading="lazy"></div>
+  <div class="gal-item"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=85&fit=crop" alt="Cuidado" loading="lazy"></div>
+  
+</div>
+ 
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span class="mq-item">Alisamento Profissional</span><span class="mq-item">Tratamentos Capilares</span><span class="mq-item">Coloração</span><span class="mq-item">Escova & Finalização</span><span class="mq-item">Hidratação Profunda</span><span class="mq-item">Corte Personalizado</span><span class="mq-item">Manicure & Pedicure</span><span class="mq-item">Atendimento com Amor</span>
+    <span class="mq-item">Alisamento Profissional</span><span class="mq-item">Tratamentos Capilares</span><span class="mq-item">Coloração</span><span class="mq-item">Escova & Finalização</span><span class="mq-item">Hidratação Profunda</span><span class="mq-item">Corte Personalizado</span><span class="mq-item">Manicure & Pedicure</span><span class="mq-item">Atendimento com Amor</span>
+  </div>
+</div>
+ 
+<!-- SERVICES -->
+<section id="servicos" class="svc-section">
+  <div class="eyebrow rv">Especialidades</div>
+  <h2 class="sh rv">O que fazemos <em>de melhor</em></h2>
+  <div class="svc-grid">
+    <div class="scard rv"><div class="sc-no">01</div><div class="sc-icon">✨</div><h3 class="sc-title">Alisamento</h3><p class="sc-desc">Técnicas modernas para cabelos lisos, macios e brilhosos. Resultado que dura e transforma completamente.</p><span class="sc-tag">Mais Procurado</span></div>
+    <div class="scard rv d1"><div class="sc-no">02</div><div class="sc-icon">✂️</div><h3 class="sc-title">Corte & Estilo</h3><p class="sc-desc">Cortes personalizados que realçam sua beleza natural. Do clássico ao moderno com precisão e arte.</p><span class="sc-tag">Personalizado</span></div>
+    <div class="scard rv d2"><div class="sc-no">03</div><div class="sc-icon">🌿</div><h3 class="sc-title">Tratamentos</h3><p class="sc-desc">Hidratação, reconstrução e nutrição para recuperar a saúde e o brilho dos seus fios de dentro para fora.</p><span class="sc-tag">Saúde Capilar</span></div>
+    <div class="scard rv"><div class="sc-no">04</div><div class="sc-icon">🎨</div><h3 class="sc-title">Coloração</h3><p class="sc-desc">Mechas, tinturas e técnicas de coloração para renovar o visual com cores vivas, naturais ou ousadas.</p><span class="sc-tag">Tendência</span></div>
+    <div class="scard rv d1"><div class="sc-no">05</div><div class="sc-icon">💅</div><h3 class="sc-title">Manicure & Pedicure</h3><p class="sc-desc">Unhas impecáveis com todo o cuidado e atenção que você merece. Acabamento que impressiona.</p><span class="sc-tag">Cuidado Total</span></div>
+    <div class="scard rv d2"><div class="sc-no">06</div><div class="sc-icon">💫</div><h3 class="sc-title">Finalização</h3><p class="sc-desc">Escova, babyliss e mais para você sair radiante, com autoestima renovada e cabelo absolutamente deslumbrante.</p><span class="sc-tag">Acabamento</span></div>
+  </div>
+</section>
+ 
+<!-- ABOUT -->
+<div class="about-wrap" id="sobre">
+  <div class="about-vis">
+    <img class="img-big" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=85&fit=crop&crop=faces" alt="Atendimento" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=500&q=85&fit=crop" alt="Salão" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=500&q=85&fit=crop" alt="Resultado" loading="lazy">
+  </div>
+  <div class="about-copy">
+    <div class="eyebrow rv">Sobre o Espaço</div>
+    <h2 class="sh rv">O salão que você<br><em>confia de olhos</em><br>fechados</h2>
+    <p class="rv">O Espaço Anaisa Pupim é sinônimo de excelência, carinho e confiança em Taquaritinga. Com uma equipe de profissionais apaixonadas pelo que fazem, cada atendimento é uma experiência única e verdadeiramente transformadora.</p>
+    <p class="rv">Fazem tudo com muito amor e carinho — clientes que entram como visitas saem como amigas. Um espaço onde você se sente acolhida e especial desde o primeiro momento.</p>
+    <div class="about-pills rv">
+      <span class="ap">✦ 5,0 Google Maps</span>
+      <span class="ap">✦ 65 Avaliações</span>
+      <span class="ap">✦ Centro de Taquaritinga</span>
+      <span class="ap">✦ Equipe Especializada</span>
+    </div>
+    <a class="btn-wa-gold rv" href="https://wa.me/5516992859805?text=Olá%20Anaisa!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20horário%20✨" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.879L0 24l6.294-1.515A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.663-.497-5.197-1.367l-.373-.22-3.736.9.938-3.629-.243-.38A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Agendar Agora
+    </a>
+  </div>
+</div>
+ 
+<!-- QUOTE BAND -->
+<div class="qband">
+  <blockquote class="rv">"O Salão da Ana é o único na cidade que confio meu cabelo de olhos fechados."</blockquote>
+  <cite class="rv d1">— Cliente fiel · Google Maps · ★★★★★</cite>
+</div>
+ 
+<!-- REVIEWS -->
+<section id="avaliacoes" class="rev-section">
+  <div class="rev-header">
+    <div>
+      <div class="eyebrow rv">Avaliações Reais</div>
+      <h2 class="sh rv">O que as clientes <em>dizem</em></h2>
+    </div>
+    <div class="rv">
+      <div class="big-num">5,0</div>
+      <div class="big-stars">★★★★★</div>
+      <div class="big-sub">65 avaliações · Google Maps</div>
+    </div>
+  </div>
+  <div class="rev-grid">
+    <div class="rcard rv">
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">"Fui muito bem recebida, o tratamento foi excelente, adorei o atendimento das funcionárias. São todas profissionais!"</p>
+      <div class="rc-author"><div class="rc-av">SM</div><div><div class="rc-name">Suely Marchi</div><div class="rc-meta">há 2 meses · Google Maps</div></div></div>
+    </div>
+    <div class="rcard rv d1">
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">"Eu amoooo o salão e as mãos de fada da Anaisa e das meninas, fazem tudo com muito amor e carinho, não troco por nada e recomendo muuuuito, nota mil!"</p>
+      <div class="rc-author"><div class="rc-av">MM</div><div><div class="rc-name">Monica Mendes</div><div class="rc-meta">há 2 anos · Google Maps</div></div></div>
+    </div>
+    <div class="rcard rv d2">
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">"Amei!! Atendem muito bem, me senti completamente acolhida. Uma experiência maravilhosa do início ao fim!"</p>
+      <div class="rc-author"><div class="rc-av">GG</div><div><div class="rc-name">giflix giflix</div><div class="rc-meta">há 7 meses · Google Maps</div></div></div>
+    </div>
+    <div class="rcard rv">
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">"Profissionais excelentes, competentes e atenciosos. Cada visita é uma experiência de cuidado e carinho verdadeiro."</p>
+      <div class="rc-author"><div class="rc-av">C</div><div><div class="rc-name">Cliente Fiel</div><div class="rc-meta">Google Maps</div></div></div>
+    </div>
+    <div class="rcard rv d1">
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">"Profissional excelente, trabalho feito com muito amor! Não existe lugar melhor para cuidar dos cabelos em Taquaritinga."</p>
+      <div class="rc-author"><div class="rc-av">A</div><div><div class="rc-name">Avaliação Google</div><div class="rc-meta">Google Maps</div></div></div>
+    </div>
+    <div class="rcard rv d2">
+      <div class="rc-stars">★★★★★</div>
+      <p class="rc-text">"Cliente que vira amiga! Tratam cada cliente com muito carinho e atenção individualizada. Me sinto em casa toda visita."</p>
+      <div class="rc-author"><div class="rc-av">R</div><div><div class="rc-name">Cliente Satisfeita</div><div class="rc-meta">Google Maps</div></div></div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CTA -->
+<div class="cta-block">
+  <div class="eyebrow rv">Agende Agora</div>
+  <h2 class="sh rv">Venha se <em>transformar</em><br>com a gente!</h2>
+  <p class="rv">Mande uma mensagem e garanta seu horário. A Anaisa e sua equipe estão prontas para cuidar de você com todo o amor e carinho que você merece.</p>
+  <a class="wa-mega rv" href="https://wa.me/5516992859805?text=Olá%20Anaisa!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20horário%20✨%20Pode%20me%20informar%20a%20disponibilidade?" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.879L0 24l6.294-1.515A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.663-.497-5.197-1.367l-.373-.22-3.736.9.938-3.629-.243-.38A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Chamar no WhatsApp agora
+  </a>
+  <div class="wa-tel rv">(16) <a href="tel:+5516992859805">99285-9805</a> · Respondemos rapidinho! 💬</div>
+</div>
+ 
+<!-- CONTACT -->
+<div class="contact-wrap" id="contato">
+  <div class="c-info">
+    <div class="eyebrow rv">Encontre-nos</div>
+    <h2 class="sh rv">Como nos <em>encontrar</em></h2>
+    <div class="ig rv">
+      <h4>Localização</h4>
+      <div class="irow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        R. Miguel Anselmo, 420 — Centro<br>Taquaritinga – SP, CEP 15900-059
+      </div>
+    </div>
+    <div class="ig rv">
+      <h4>Contato</h4>
+      <div class="irow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+        <a href="tel:+5516992859805">(16) 99285-9805</a>
+      </div>
+      <div class="irow">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--rose-deep)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.879L0 24l6.294-1.515A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.663-.497-5.197-1.367l-.373-.22-3.736.9.938-3.629-.243-.38A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        <a href="https://wa.me/5516992859805?text=Olá%20Anaisa!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20horário%20✨" target="_blank">(16) 99285-9805 · WhatsApp</a>
+      </div>
+    </div>
+    <div class="ig rv">
+      <h4>Horário de Funcionamento</h4>
+      <div class="irow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div>Quinta-feira: abre às <strong>13h00</strong><br><span style="font-size:.8rem">Consulte outros dias e horários pelo WhatsApp</span></div>
+      </div>
+      <span class="open-tag">Consulte disponibilidade</span>
+      <div class="hbar-wrap">
+        <div class="hbar-label">Movimento típico — Quinta-feira</div>
+        <div class="hbars">
+          <div class="hb" style="height:10%"></div>
+          <div class="hb hi" style="height:40%"></div>
+          <div class="hb pk" style="height:100%"></div>
+          <div class="hb pk" style="height:90%"></div>
+          <div class="hb hi" style="height:70%"></div>
+          <div class="hb hi" style="height:55%"></div>
+          <div class="hb" style="height:30%"></div>
+        </div>
+        <div class="hb-times"><span>13h</span><span>14h</span><span>15h</span><span>17h</span><span>19h</span><span>21h</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="c-map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3696!2d-48.503!3d-21.401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sR.+Miguel+Anselmo%2C+420+Centro+Taquaritinga+SP!5e0!3m2!1spt-BR!2sbr!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Espaço Anaisa Pupim"></iframe>
+  </div>
+</div>
+ 
+<!-- FOOT BAR -->
+<div class="foot-bar"></div>
+<footer>
+  <div class="flogo">Espaço Anaisa Pupim<small>Salão de Beleza · Taquaritinga SP</small></div>
+  <div class="fcenter">R. Miguel Anselmo, 420 · Centro · Taquaritinga – SP<br>(16) 99285-9805 · Nota 5,0 no Google ✦<br><br>© 2025 Espaço Anaisa Pupim</div>
+  <div class="fright">
+    <a href="https://wa.me/5516992859805?text=Olá%20Anaisa!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20um%20horário%20✨" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.559 4.14 1.535 5.879L0 24l6.294-1.515A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.89 0-3.663-.497-5.197-1.367l-.373-.22-3.736.9.938-3.629-.243-.38A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      WhatsApp
+    </a>
+    <a href="tel:+5516992859805">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+      (16) 99285-9805
+    </a>
+  </div>
+</footer>
+ 
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('gone'),2000)});
+ 
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function tick(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})();
+document.querySelectorAll('a,button,.scard,.gal-item,.rcard,.gstrip-item,.hdot').forEach(el=>{
+  el.addEventListener('mouseenter',()=>ring.classList.add('big'));
+  el.addEventListener('mouseleave',()=>ring.classList.remove('big'));
+});
+ 
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('stuck',scrollY>60),{passive:true});
+ 
+const burger=document.getElementById('burger'),drawer=document.getElementById('drawer'),dclose=document.getElementById('dclose');
+burger.addEventListener('click',()=>drawer.classList.add('open'));
+dclose.addEventListener('click',()=>drawer.classList.remove('open'));
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{drawer.classList.remove('open');const t=document.querySelector(a.getAttribute('href'));if(t)setTimeout(()=>t.scrollIntoView({behavior:'smooth'}),320)}));
+ 
+let ci=0;
+const slides=document.querySelectorAll('.hs-slide'),dots=document.querySelectorAll('.hdot');
+function goTo(n){slides[ci].classList.remove('on');dots[ci].classList.remove('on');ci=n;slides[ci].classList.add('on');dots[ci].classList.add('on')}
+setInterval(()=>goTo((ci+1)%slides.length),5500);
+dots.forEach(d=>d.addEventListener('click',()=>goTo(+d.dataset.i)));
+ 
+const rObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');rObs.unobserve(e.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>rObs.observe(el));
+ 
+function countUp(el,to,dec){let v=0;const step=16,inc=to/(1800/step);const t=setInterval(()=>{v=Math.min(v+inc,to);el.textContent=dec?v.toFixed(dec):Math.floor(v);if(v>=to)clearInterval(t)},step)}
+const cObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.gstrip-num[data-val]').forEach(el=>countUp(el,+el.dataset.val,+el.dataset.dec||0));cObs.unobserve(e.target)}}),{threshold:.5});
+const gs=document.querySelector('.gstrip');if(gs)cObs.observe(gs);
+ 
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}}));
+</script>
+</body>
+</html>
+ 
